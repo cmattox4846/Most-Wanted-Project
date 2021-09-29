@@ -165,9 +165,6 @@ function searchByEyeColor(people){
   
 
 
-
-
-
 //Gender Function
 function searchByGender(people){
   let gender = promptFor("what is the person's gender?", autoValid);
@@ -185,7 +182,7 @@ function searchByGender(people){
 
 
 
-//TODO: add other trait filter functions here.
+
 
 
 
