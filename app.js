@@ -15,7 +15,7 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
-      whichTrait()
+      whichTrait(people)
       break;
       default:
     app(people); // restart app
@@ -65,26 +65,26 @@ function mainMenu(person, people){
 /////////////////////////////////////////////////////////////////
 //#region 
 
-function whichTrait(){
+function whichTrait(people){
   let choiceTrait = prompt('Please choose which triat to search for:' + '\n' + '1 - Eye Color'+ '\n' + '2 - Gender'+ '\n' + '3 - Height'+ '\n' + '4 - Weight'+ '\n' + '5 - Parents' + '\n' + '6 - Current Spouse' )
-    switch(displayOption){
+    switch(choiceTrait){
       case "1":
-       searchByEyeColor()
+       searchByEyeColor(people)
       break;
       case "2":
-        searchByGender()
+        searchByGender(people)
       break;
       case "3":
-        searchByHeight()
+        searchByHeight(peolpe)
       break;
       case "4":
-        searchByWeight()
+        searchByWeight(people)
       break;
       case "5":
-        searchByParents()
+        searchByParents(people)
       break;
       case '6':
-        searchByCurrentSpouse()
+        searchByCurrentSpouse(people)
       break;
         
     }
