@@ -15,7 +15,7 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
-      // TODO: search by traits
+      whichTrait()
       break;
       default:
     app(people); // restart app
@@ -65,6 +65,56 @@ function mainMenu(person, people){
 /////////////////////////////////////////////////////////////////
 //#region 
 
+function whichTrait(){
+  let choiceTrait = prompt('Please choose which triat to search for:' + '\n' + '1 - Eye Color'+ '\n' + '2 - Gender'+ '\n' + '3 - Height'+ '\n' + '4 - Weight'+ '\n' + '5 - Parents' + '\n' + '6 - Current Spouse' )
+    switch(displayOption){
+      case "1":
+       searchByEyeColor()
+      break;
+      case "2":
+        searchByGender()
+      break;
+      case "3":
+        searchByHeight()
+      break;
+      case "4":
+        searchByWeight()
+      break;
+      case "5":
+        searchByParents()
+      break;
+      case '6':
+        searchByCurrentSpouse()
+      break;
+        
+    }
+     
+  }
+
+function searchByHeight(people)
+{
+  let heightType = parseInt(prompt('What do you want to search for:' +'\n' +' 1 - Search Below height' +'\n'+ '2 - Above this height '))
+  let heightAmount
+  let heightBelow = (potentialMatch <= heightAmount);
+  let heightAbove = (potentialMatch >= heightAmount)
+    if (heightType === '1')
+    {
+      heightAmount = parseInt(prompt('Please enter the height in inches to search below:'))
+      let foundPerson = people.filter(function(potentialMatch, heightBelow)
+      {
+        return foundPerson;
+      })
+    }
+
+    else{
+      heightAmount = parseInt(prompt('Please enter the height in inches to search above:'))
+      let foundPerson = people.filter(function(potentialMatch, heightAbove)
+      {
+        return foundPerson;
+      })
+    }
+}
+
 //nearly finished function used to search through an array of people to find matching first and last name and return a SINGLE person object.
 function searchByName(people){
   let firstName = promptFor("What is the person's first name?", autoValid);
@@ -84,8 +134,38 @@ function searchByName(people){
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
 function searchByEyeColor(people){
-
+  
+  let eyeColor = promptFor('Please choose an eye color to search for:' + '\n' + '1 - Blue'+ '\n' + '2 - Hazel'+ '\n' + '3 - Black'+ '\n' + '4 - Green'+ '\n' + '5 - Brown', autoValid);
+  
+  switch(displayOption){
+    case "1":
+      let eyeColorBlue = people.filter(function(potentialMatch){
+      return eyeColorBlue}
+    break;
+    case "2":
+      let eyeColorHazel = people.filter(function(potentialMatch){
+        return eyeColorHazel}
+    break;
+    case "3":
+      let eyeColorBlack = people.filter(function(potentialMatch){
+        return eyeColorBlack}
+    break;
+    case "4":
+      let eyeColorGreen = people.filter(function(potentialMatch){
+      return eyeColorGreen}
+    break;
+    case "family":
+      let eyeColorBrown = people.filter(function(potentialMatch){
+        return eyeColorBrown}
+    break;
+      
+  }
+   console.log(eyeColor)
 }
+  
+
+
+
 
 //TODO: add other trait filter functions here.
 
