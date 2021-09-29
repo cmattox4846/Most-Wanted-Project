@@ -140,23 +140,23 @@ function searchByEyeColor(people){
   switch(displayOption){
     case "1":
       let eyeColorBlue = people.filter(function(potentialMatch){
-      return eyeColorBlue}
+      return eyeColorBlue})
     break;
     case "2":
       let eyeColorHazel = people.filter(function(potentialMatch){
-        return eyeColorHazel}
+        return eyeColorHazel})
     break;
     case "3":
       let eyeColorBlack = people.filter(function(potentialMatch){
-        return eyeColorBlack}
+        return eyeColorBlack})
     break;
     case "4":
       let eyeColorGreen = people.filter(function(potentialMatch){
-      return eyeColorGreen}
+      return eyeColorGreen})
     break;
     case "family":
       let eyeColorBrown = people.filter(function(potentialMatch){
-        return eyeColorBrown}
+        return eyeColorBrown})
     break;
       
   }
