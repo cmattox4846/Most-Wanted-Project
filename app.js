@@ -37,15 +37,14 @@ function mainMenu(person, people){
     alert("Could not find that individual.");
     return app(people); // restart
   }
-
+ 
   let displayOption = promptFor("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid);
 
   switch(displayOption){
     case "info":
-    let resultArray = displayPeople(person)
-    displayPerson(resultArray)
+      alert(displayPerson(displayOption))
     break;
-    case "family":
+    case "family":p
     // TODO: get person's family
     break;
     case "descendants":
@@ -135,7 +134,7 @@ function searchByName(people){
     }
   })
   // TODO: find the person single person object using the name they entered.
-  return displayPerson(foundPerson);
+  return foundPerson;
 }
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
@@ -223,14 +222,14 @@ function displayPeople(people){
 function displayPerson(person){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
-  let personInfo = "First Name: " + person.firstName + "\n";
-  personInfo += "Last Name: " + person.lastName + "\n";
-  personInfo += "Gender " + person.gender + "\n";
-  personInfo += "Height " + person.height + "\n";
-  personInfo += "Weight " + person.age + "\n";
-  personInfo += "Age " + person.dob + "\n";
-  personInfo += "Occupation " + person.occupation + "\n";
-  personInfo += "Eye Color " + person.eyeColor + "\n";
+  person = "First Name: " + person.firstName + "\n";
+  person += "Last Name: " + person.lastName + "\n";
+  person += "Gender " + person.gender + "\n";
+  person += "Height " + person.height + "\n";
+  person += "Weight " + person.age + "\n";
+  person += "Age " + person.dob + "\n";
+  person += "Occupation " + person.occupation + "\n";
+  person += "Eye Color " + person.eyeColor + "\n";
     // TODO: finish getting the rest of the information to display.
   alert(personInfo);
 }
