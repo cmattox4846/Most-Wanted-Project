@@ -15,7 +15,14 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
-      searchResults = whichTrait(people)
+      let singleOrMultipleTrait = parseInt(prompt('1 - Search single trait' + '\n' + '2 - Search Muliple traits'))
+       if (singleOrMultipleTrait === 1 ){
+        searchResults = whichTrait(people)
+       }
+       else{
+        searchResults = multipleTraits(people)
+       }
+       
       break;
       default:
     app(people); // restart app
@@ -38,7 +45,7 @@ function mainMenu(person, people){
     return app(people); // restart
   }
  
-  let displayOption = promptFor("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid);
+  let displayOption = promptFor("Found " + person[0].firstName + " " + person[0].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid);
 
   switch(displayOption){
     case "info":
@@ -69,56 +76,151 @@ function mainMenu(person, people){
 /////////////////////////////////////////////////////////////////
 //#region 
 
-function whichTrait(people){
-  let choiceTrait = prompt('Please choose which triat to search for:' + '\n' + '1 - Eye Color'+ '\n' + '2 - Gender'+ '\n' + '3 - Height'+ '\n' + '4 - Weight'+ '\n' + '5 - Parents' + '\n' + '6 - Current Spouse' )
-    
-  let searchResults
-  switch(choiceTrait){
-      case "1":
-        searchResults = searchByEyeColor(people)
-      break;
-      case "2":
-        searchResults = searchByGender(people)
-      break;
-      case "3":
-        searchResults =  searchByHeight(peolpe)
-      break;
-      case "4":
-        searchResults =  searchByWeight(people)
-      break;
-      case "5":
-        searchResults =  searchByParents(people)
-      break;
-      case '6':
-        searchResults = searchByCurrentSpouse(people)
-      break;
-        
+function choiceTraits(){
+  let traits =[]  
+
+
+  let triatOptions = parseInt(prompt('Please choose which triat to search for:' + '\n' + '1 - Eye Color'+ '\n' + '2 - Gender'+ '\n' + '3 - Height'+ '\n' + '4 - Weight'+ '\n' + '5 - Occupation' + '\n'  +'0 - To complete search' ))
+    if (triatOptions != 0){
+      traits.push(triatOptions)
+        choiceTraits()
+      
+      }
+    else{
+      return false
     }
-    return searchResults
-  }
+   return traits
+}
+
+function multipleTraits(people){
+  
+  let chooseTrait = choiceTraits()
+   let searchResults
+  for(let i=0;i<chooseTrait.length; i++){
+        
+    switch(chooseTrait[i]){
+          case "1":
+            searchResults = searchByEyeColor(people)
+          break;
+          case "2":
+            searchResults = searchByGender(people)
+          break;
+          case "3":
+            searchResults =  searchByHeight(people)
+          break;
+          case "4":
+            searchResults =  searchByWeight(people)
+          break;
+          case "5":
+            searchResults =  searchByParents(people)
+          break;
+          case '6':
+            searchResults = searchByCurrentSpouse(people)
+          break;
+    }
+}
+ return searchResults
+}
+
+function whichTrait(people){
+ 
+  
+  
+      let choiceTrait = prompt('Please choose which triat to search for:' + '\n' + '1 - Eye Color'+ '\n' + '2 - Gender'+ '\n' + '3 - Height'+ '\n' + '4 - Weight'+ '\n' + '5 - Parents' + '\n' + '6 - Current Spouse' )
+        
+      let searchResults
+      switch(choiceTrait){
+          case "1":
+            searchResults = searchByEyeColor(people)
+          break;
+          case "2":
+            searchResults = searchByGender(people)
+          break;
+          case "3":
+            searchResults =  searchByHeight(people)
+          break;
+          case "4":
+            searchResults =  searchByWeight(people)
+          break;
+          case "5":
+            searchResults =  searchByParents(people)
+          break;
+          case '6':
+            searchResults = searchByCurrentSpouse(people)
+          break;
+            
+        }
+        return searchResults
+      
+ 
+  // else{
+  //       let chooseTrait = choiceTraits()
+        
+  //         switch(choiceTrait){
+  //           case "1":
+  //             searchResults = searchByEyeColor(people)
+  //           break;
+  //           case "2":
+  //             searchResults = searchByGender(people)
+  //           break;
+  //           case "3":
+  //             searchResults =  searchByHeight(people)
+  //           break;
+  //           case "4":
+  //             searchResults =  searchByWeight(people)
+  //           break;
+  //           case "5":
+  //             searchResults =  searchByParents(people)
+  //           break;
+  //           case '6':
+  //             searchResults = searchByCurrentSpouse(people)
+  //           break;
+    
+
+  // }
+}
 
 function searchByHeight(people)
 {
   let heightType = parseInt(prompt('What do you want to search for:' +'\n' +' 1 - Search Below height' +'\n'+ '2 - Above this height '))
-  let heightAmount
-  let heightBelow = (people <= heightAmount);
-  let heightAbove = (people >= heightAmount)
-    if (heightType === '1')
+  let heightAmount = ""
+  let searchResults
+
+    if (heightType === 1)
     {
       heightAmount = parseInt(prompt('Please enter the height in inches to search below:'))
-      let foundPerson = people.filter(function(heightBelow)
+      let foundPerson = people.filter(function(potentialMatch){
+      if (potentialMatch.height <= heightAmount)
       {
-        return foundPerson;
+        return true;
+      }
+      else{
+        return false;
+      }
+             
+       ;
       })
+      searchResults = foundPerson
     }
 
     else{
       heightAmount = parseInt(prompt('Please enter the height in inches to search above:'))
-      let foundPerson = people.filter(function(potentialMatch, heightAbove)
+      let foundPerson = people.filter(function(potentialMatch)
       {
-        return foundPerson;
-      })
+        if (potentialMatch.height >= heightAmount)
+        {
+          return true;
+        }
+        else{
+          return false;
+        }
+                  
+         ;
+        })
+      searchResults = foundPerson
     }
+
+    return searchResults
 }
 
 //nearly finished function used to search through an array of people to find matching first and last name and return a SINGLE person object.
@@ -128,7 +230,7 @@ function searchByName(people){
 
   let foundPerson = people.filter(function(potentialMatch){
     if(potentialMatch.firstName === firstName && potentialMatch.lastName === lastName){
-      return true;
+            return true;
     }
     else{
       return false;
