@@ -129,7 +129,7 @@ function searchByName(people){
     }
   })
   // TODO: find the person single person object using the name they entered.
-  return foundPerson;
+  return displayPerson(foundPerson);
 }
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
@@ -139,11 +139,8 @@ function searchByEyeColor(people){
   
   switch(displayOption){
     case "1":
-<<<<<<< HEAD
-      let eyeColorBlue = people.eyeColor.filter(function(blue){
-=======
       let eyeColorBlue = people.filter(function(potentialMatch){
->>>>>>> a601f858565b51174311fd10250738a805dd9b18
+      
       return eyeColorBlue})
     break;
     case "2":
@@ -221,7 +218,13 @@ function displayPerson(person){
   // height, weight, age, name, occupation, eye color.
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
-  // TODO: finish getting the rest of the information to display.
+  personInfo += "Gender " + person.gender + "\n";
+  personInfo += "Height " + person.height + "\n";
+  personInfo += "Weight " + person.age + "\n";
+  personInfo += "Age " + person.dob + "\n";
+  personInfo += "Occupation " + person.occupation + "\n";
+  personInfo += "Eye Color " + person.eyeColor + "\n";
+    // TODO: finish getting the rest of the information to display.
   alert(personInfo);
 }
 
@@ -266,12 +269,8 @@ function autoValid(input){
 //Unfinished validation function you can use for any of your custom validation callbacks.
 //can be used for things like eye color validation for example.
 function customValidation(input){
-<<<<<<< HEAD
-  return true 
-=======
   return input;
   
->>>>>>> a601f858565b51174311fd10250738a805dd9b18
 }
 
 //#endregion
