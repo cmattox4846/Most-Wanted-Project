@@ -42,8 +42,10 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-    let resultArray = displayPeople(person)
-    displayPerson(resultArray)
+      
+      displayPeople(person)
+      app(people)
+     //displayPerson(resultArray)
     break;
     case "family":
     // TODO: get person's family
@@ -126,7 +128,8 @@ function searchByName(people){
   let firstName = promptFor("What is the person's first name?", autoValid);
   let lastName = promptFor("What is the person's last name?", autoValid);
 
-  let foundPerson = people.filter(function(potentialMatch){
+  
+let foundPerson = people.filter(function(potentialMatch){
     if(potentialMatch.firstName === firstName && potentialMatch.lastName === lastName){
       return true;
     }
@@ -135,7 +138,7 @@ function searchByName(people){
     }
   })
   // TODO: find the person single person object using the name they entered.
-  return displayPerson(foundPerson);
+  return  foundPerson;
 }
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
@@ -215,10 +218,10 @@ function searchByWeight(people){
 
 // alerts a list of people
 function displayPeople(people){
+  
   alert(people.map(function(person){
-    return person.firstName + " " + person.lastName;
-  }).join("\n"));
-}
+    return person.firstName + " " + person.lastName + " "+  person.gender  + " " + person.height +"inches" + ' ' + person.dob + " "+  person.occupation +"  " + person.eyeColor
+   }).join("\n"));}
 
 function displayPerson(person){
   // print all of the information about a person:
@@ -227,13 +230,16 @@ function displayPerson(person){
   personInfo += "Last Name: " + person.lastName + "\n";
   personInfo += "Gender " + person.gender + "\n";
   personInfo += "Height " + person.height + "\n";
-  personInfo += "Weight " + person.age + "\n";
+  personInfo += "Weight " + person.weight + "\n";
   personInfo += "Age " + person.dob + "\n";
   personInfo += "Occupation " + person.occupation + "\n";
   personInfo += "Eye Color " + person.eyeColor + "\n";
-    // TODO: finish getting the rest of the information to display.
+  
+  // TODO: finish getting the rest of the information to display.
+
   alert(personInfo);
-}
+  }
+
 
 //#endregion
 
