@@ -95,12 +95,12 @@ function searchByHeight(people)
 {
   let heightType = parseInt(prompt('What do you want to search for:' +'\n' +' 1 - Search Below height' +'\n'+ '2 - Above this height '))
   let heightAmount
-  let heightBelow = (people <= heightAmount);
-  let heightAbove = (people >= heightAmount)
+  let heightBelow = (potentialMatch <= heightAmount);
+  let heightAbove = (potentialMatch >= heightAmount)
     if (heightType === '1')
     {
       heightAmount = parseInt(prompt('Please enter the height in inches to search below:'))
-      let foundPerson = people.filter(function(heightBelow)
+      let foundPerson = people.filter(function(potentialMatch, heightBelow)
       {
         return foundPerson;
       })
@@ -137,13 +137,13 @@ function searchByEyeColor(people){
   
   let eyeColor = promptFor('Please choose an eye color to search for:' + '\n' + '1 - Blue'+ '\n' + '2 - Hazel'+ '\n' + '3 - Black'+ '\n' + '4 - Green'+ '\n' + '5 - Brown', autoValid);
   
-  switch(eyeColor){
+  switch(displayOption){
     case "1":
-      let eyeColorBlue = people.filter(function(eyeColor = blue){
+      let eyeColorBlue = people.filter(function(potentialMatch){
       return eyeColorBlue})
     break;
     case "2":
-      let eyeColorHazel = people.filter(function(eyeColor = Hazel){
+      let eyeColorHazel = people.filter(function(potentialMatch){
         return eyeColorHazel})
     break;
     case "3":
