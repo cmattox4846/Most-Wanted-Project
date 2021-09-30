@@ -67,29 +67,29 @@ function mainMenu(person, people){
 
 function whichTrait(people){
   let choiceTrait = prompt('Please choose which triat to search for:' + '\n' + '1 - Eye Color'+ '\n' + '2 - Gender'+ '\n' + '3 - Height'+ '\n' + '4 - Weight'+ '\n' + '5 - Parents' + '\n' + '6 - Current Spouse' )
-    switch(choiceTrait){
-      case "1":
-       searchByEyeColor(people)
-      break;
-      case "2":
-        searchByGender(people)
-      break;
-      case "3":
-        searchByHeight(peolpe)
-      break;
-      case "4":
-        searchByWeight(people)
-      break;
-      case "5":
-        searchByParents(people)
-      break;
-      case '6':
-        searchByCurrentSpouse(people)
-      break;
-        
-    }
-     
+  switch(choiceTrait){
+    case "1":
+     searchByEyeColor(people)
+    break;
+    case "2":
+      searchByGender(people)
+    break;
+    case "3":
+      searchByHeight(peolpe)
+    break;
+    case "4":
+      searchByWeight(people)
+    break;
+    case "5":
+      searchByParents(people)
+    break;
+    case '6':
+      searchByCurrentSpouse(people)
+    break;
+      
   }
+     
+}
 
 function searchByHeight(people)
 {
@@ -167,7 +167,7 @@ function searchByEyeColor(people){
 
 //Gender Function
 function searchByGender(people){
-  let gender = promptFor("what is the person's gender?", autoValid);
+  let gender = promptFor("what is the person's gender?", customValidation);
 
   let foundGender= people.filter(function(potentialMatch){
     if(potentialMatch.gender === gender){
@@ -184,7 +184,7 @@ function searchByGender(people){
 
 //Weight Function
 function searchByWeight(people){
-  let weight= promptFor("how much does the person weight?", autoValid)
+  let weight= promptFor("how much does the person weight?", customValidation)
   
   let weightFound= people.filter(function(potentialMatch){
     if(potentialMatch.weight === weight){
@@ -262,6 +262,7 @@ function autoValid(input){
 //Unfinished validation function you can use for any of your custom validation callbacks.
 //can be used for things like eye color validation for example.
 function customValidation(input){
+  return input;
   
 }
 
