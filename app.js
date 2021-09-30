@@ -139,7 +139,7 @@ function searchByEyeColor(people){
   
   switch(eyeColor){
     case "1":
-      let eyeColorBlue = people.filter(function(eyeColor = blue){
+      let eyeColorBlue = people.eyeColor.filter(function(blue){
       return eyeColorBlue})
     break;
     case "2":
@@ -262,7 +262,7 @@ function autoValid(input){
 //Unfinished validation function you can use for any of your custom validation callbacks.
 //can be used for things like eye color validation for example.
 function customValidation(input){
-  
+  return true 
 }
 
 //#endregion
