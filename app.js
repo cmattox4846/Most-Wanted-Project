@@ -67,40 +67,40 @@ function mainMenu(person, people){
 
 function whichTrait(people){
   let choiceTrait = prompt('Please choose which triat to search for:' + '\n' + '1 - Eye Color'+ '\n' + '2 - Gender'+ '\n' + '3 - Height'+ '\n' + '4 - Weight'+ '\n' + '5 - Parents' + '\n' + '6 - Current Spouse' )
-    switch(choiceTrait){
-      case "1":
-       searchByEyeColor(people)
-      break;
-      case "2":
-        searchByGender(people)
-      break;
-      case "3":
-        searchByHeight(peolpe)
-      break;
-      case "4":
-        searchByWeight(people)
-      break;
-      case "5":
-        searchByParents(people)
-      break;
-      case '6':
-        searchByCurrentSpouse(people)
-      break;
-        
-    }
-     
+  switch(choiceTrait){
+    case "1":
+     searchByEyeColor(people)
+    break;
+    case "2":
+      searchByGender(people)
+    break;
+    case "3":
+      searchByHeight(peolpe)
+    break;
+    case "4":
+      searchByWeight(people)
+    break;
+    case "5":
+      searchByParents(people)
+    break;
+    case '6':
+      searchByCurrentSpouse(people)
+    break;
+      
   }
+     
+}
 
 function searchByHeight(people)
 {
   let heightType = parseInt(prompt('What do you want to search for:' +'\n' +' 1 - Search Below height' +'\n'+ '2 - Above this height '))
   let heightAmount
-  let heightBelow = (people <= heightAmount);
-  let heightAbove = (people >= heightAmount)
+  let heightBelow = (potentialMatch <= heightAmount);
+  let heightAbove = (potentialMatch >= heightAmount)
     if (heightType === '1')
     {
       heightAmount = parseInt(prompt('Please enter the height in inches to search below:'))
-      let foundPerson = people.filter(function(heightBelow)
+      let foundPerson = people.filter(function(potentialMatch, heightBelow)
       {
         return foundPerson;
       })
@@ -137,13 +137,17 @@ function searchByEyeColor(people){
   
   let eyeColor = promptFor('Please choose an eye color to search for:' + '\n' + '1 - Blue'+ '\n' + '2 - Hazel'+ '\n' + '3 - Black'+ '\n' + '4 - Green'+ '\n' + '5 - Brown', autoValid);
   
-  switch(eyeColor){
+  switch(displayOption){
     case "1":
+<<<<<<< HEAD
       let eyeColorBlue = people.eyeColor.filter(function(blue){
+=======
+      let eyeColorBlue = people.filter(function(potentialMatch){
+>>>>>>> a601f858565b51174311fd10250738a805dd9b18
       return eyeColorBlue})
     break;
     case "2":
-      let eyeColorHazel = people.filter(function(eyeColor = Hazel){
+      let eyeColorHazel = people.filter(function(potentialMatch){
         return eyeColorHazel})
     break;
     case "3":
@@ -167,7 +171,7 @@ function searchByEyeColor(people){
 
 //Gender Function
 function searchByGender(people){
-  let gender = promptFor("what is the person's gender?", autoValid);
+  let gender = promptFor("what is the person's gender?", customValidation);
 
   let foundGender= people.filter(function(potentialMatch){
     if(potentialMatch.gender === gender){
@@ -184,7 +188,7 @@ function searchByGender(people){
 
 //Weight Function
 function searchByWeight(people){
-  let weight= promptFor("how much does the person weight?", autoValid)
+  let weight= promptFor("how much does the person weight?", customValidation)
   
   let weightFound= people.filter(function(potentialMatch){
     if(potentialMatch.weight === weight){
@@ -262,7 +266,12 @@ function autoValid(input){
 //Unfinished validation function you can use for any of your custom validation callbacks.
 //can be used for things like eye color validation for example.
 function customValidation(input){
+<<<<<<< HEAD
   return true 
+=======
+  return input;
+  
+>>>>>>> a601f858565b51174311fd10250738a805dd9b18
 }
 
 //#endregion
