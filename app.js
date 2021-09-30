@@ -42,7 +42,9 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-      alert(displayPerson(displayOption))
+      let resultArray = displayPeople(person)
+      //displayPerson(resultArray)
+      app(people)
     break;
     case "family":p
     // TODO: get person's family
@@ -140,7 +142,7 @@ function searchByName(people){
 function searchByEyeColor(people){
   
   let eyeColor = promptFor('Please choose an eye color to search for:' + '\n' + '1 - Blue'+ '\n' + '2 - Hazel'+ '\n' + '3 - Black'+ '\n' + '4 - Green'+ '\n' + '5 - Brown', autoValid);
-  
+  let searchResults 
   switch(eyeColor){
     case "1":
       let eyeColorBlue = people.filter(function(potentialMatch){
@@ -151,7 +153,8 @@ function searchByEyeColor(people){
         else{
           return false;
         }
-      })
+          })
+      searchResults = eyeColorBlue
     break;
     case "2":
       let eyeColorHazel = people.filter(function(potentialMatch){
@@ -162,25 +165,44 @@ function searchByEyeColor(people){
           return false;
         }
       })
+      searchResults = eyeColorHazel
     break;
     case "3":
       let eyeColorBlack = people.filter(function(potentialMatch){
-        if (potentialMatch.eyeColor === 'black')
-        return eyeColor})
+        if (potentialMatch.eyeColor === 'black'){
+          return true;
+        }
+        else{
+          return false;
+        }
+      })
+      searchResults = eyeColorBlack
     break;
     case "4":
       let eyeColorGreen = people.filter(function(potentialMatch){
-        if (potentialMatch.eyeColor === 'green')
-      return eyeColor})
+        if (potentialMatch.eyeColor === 'green'){
+          return true;
+        }
+        else{
+          return false;
+        }
+      })
+      searchResults = eyeColorGreen
     break;
     case "5":
       let eyeColorBrown = people.filter(function(potentialMatch){
-        if (potentialMatch.eyeColor === 'brown')
-        return eyeColor})
+        if (potentialMatch.eyeColor === 'brown'){
+          return true;
+        }
+        else{
+          return false;
+        }
+      })
+      searchResults = eyeColorBrown
     break;
       
   }
-  return eyeColor
+  return searchResults
   
 }
   
@@ -225,6 +247,9 @@ function searchByWeight(people){
 //Functions for user interface.
 /////////////////////////////////////////////////////////////////
 //#region 
+
+
+
 
 // alerts a list of people
 function displayPeople(people){
