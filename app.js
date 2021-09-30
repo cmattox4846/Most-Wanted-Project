@@ -76,23 +76,22 @@ function whichTrait(people){
   let searchResults
   switch(choiceTrait){
       case "1":
-       searchByEyeColor(people)
+        searchResults = searchByEyeColor(people)
       break;
       case "2":
         searchResults = searchByGender(people)
-        
       break;
       case "3":
-        searchByHeight(peolpe)
+        searchResults =  searchByHeight(peolpe)
       break;
       case "4":
-        searchByWeight(people)
+        searchResults =  searchByWeight(people)
       break;
       case "5":
-        searchByParents(people)
+        searchResults =  searchByParents(people)
       break;
       case '6':
-        searchByCurrentSpouse(people)
+        searchResults = searchByCurrentSpouse(people)
       break;
         
     }
@@ -150,28 +149,43 @@ function searchByEyeColor(people){
     case "1":
       let eyeColorBlue = people.filter(function(potentialMatch){
         if (potentialMatch.eyeColor === 'blue')
-      return eyeColor})
+        {
+          return true;
+        }
+        else{
+          return false;
+        }
+      })
     break;
     case "2":
-      let eyeColorHazel = people.filter(function(eyeColor = Hazel){
-        return eyeColorHazel})
+      let eyeColorHazel = people.filter(function(potentialMatch){
+        if (potentialMatch.eyeColor === 'hazel'){
+          return true;
+        }
+        else{
+          return false;
+        }
+      })
     break;
     case "3":
       let eyeColorBlack = people.filter(function(potentialMatch){
-        return eyeColorBlack})
+        if (potentialMatch.eyeColor === 'black')
+        return eyeColor})
     break;
     case "4":
       let eyeColorGreen = people.filter(function(potentialMatch){
-      return eyeColorGreen})
+        if (potentialMatch.eyeColor === 'green')
+      return eyeColor})
     break;
-    case "family":
+    case "5":
       let eyeColorBrown = people.filter(function(potentialMatch){
-        return eyeColorBrown})
+        if (potentialMatch.eyeColor === 'brown')
+        return eyeColor})
     break;
       
   }
   return eyeColor
-  console.log(eyeColor)
+  
 }
   
 
