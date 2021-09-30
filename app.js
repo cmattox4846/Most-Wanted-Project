@@ -37,17 +37,14 @@ function mainMenu(person, people){
     alert("Could not find that individual.");
     return app(people); // restart
   }
-
+ 
   let displayOption = promptFor("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid);
 
   switch(displayOption){
     case "info":
-      
-      displayPeople(person)
-      app(people)
-     //displayPerson(resultArray)
+      alert(displayPerson(displayOption))
     break;
-    case "family":
+    case "family":p
     // TODO: get person's family
     break;
     case "descendants":
@@ -127,8 +124,7 @@ function searchByName(people){
   let firstName = promptFor("What is the person's first name?", autoValid);
   let lastName = promptFor("What is the person's last name?", autoValid);
 
-  
-let foundPerson = people.filter(function(potentialMatch){
+  let foundPerson = people.filter(function(potentialMatch){
     if(potentialMatch.firstName === firstName && potentialMatch.lastName === lastName){
       return true;
     }
@@ -137,7 +133,7 @@ let foundPerson = people.filter(function(potentialMatch){
     }
   })
   // TODO: find the person single person object using the name they entered.
-  return  foundPerson;
+  return foundPerson;
 }
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
@@ -244,16 +240,13 @@ function displayPerson(person){
   personInfo += "Last Name: " + person.lastName + "\n";
   personInfo += "Gender " + person.gender + "\n";
   personInfo += "Height " + person.height + "\n";
-  personInfo += "Weight " + person.weight + "\n";
+  personInfo += "Weight " + person.age + "\n";
   personInfo += "Age " + person.dob + "\n";
   personInfo += "Occupation " + person.occupation + "\n";
   personInfo += "Eye Color " + person.eyeColor + "\n";
-  
-  // TODO: finish getting the rest of the information to display.
-
+    // TODO: finish getting the rest of the information to display.
   alert(personInfo);
-  }
-
+}
 
 //#endregion
 
