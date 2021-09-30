@@ -205,7 +205,7 @@ function searchByGender(people){
 
 //Weight Function
 function searchByWeight(people){
-  let weight= promptFor("how much does the person weight?", autoValid)
+  let weight= parseInt(promptFor("how much does the person weight?", autoValid))
   
   let weightFound= people.filter(function(potentialMatch){
     if(potentialMatch.weight === weight){
@@ -247,6 +247,7 @@ function displayPerson(person){
     // TODO: finish getting the rest of the information to display.
   alert(personInfo);
 }
+
 
 //#endregion
 
