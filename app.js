@@ -59,8 +59,8 @@ function mainMenu(person, people){
       //displayPerson(resultArray)
       app(people)
     break;
-    case "family":p
-    // TODO: get person's family
+    case "family":
+      searchByFamily(person, people)
     break;
     case "descendants":
     // TODO: get person's descendants
@@ -89,8 +89,8 @@ function mainMenu(person, people){
       //displayPerson(resultArray)
       app(people)
     break;
-    case "family":p
-    // TODO: get person's family
+    case "family":
+    searchByFamily(person, people)
     break;
     case "descendants":
     // TODO: get person's descendants
@@ -354,6 +354,23 @@ function searchByWeight(people){
   return weightFound
 }
 
+//Search Family Function
+function searchByFamily(person, people){
+  
+  let foundFamily= people.filter(function(potentialMatch){
+
+    
+    if(potentialMatch.parents === person[0].id || potentialMatch.currentSpouse === person[0].id){
+      return true;
+    }
+    else{return false;
+    }
+  
+  })
+
+
+  return foundFamily
+}
 
 
 //#endregion
