@@ -59,7 +59,7 @@ let answer = false
 
   switch(displayOption){
     case "info":
-      let singleResult = displayPerson(person)
+      let singleResult = displayPerson(person, i)
       //displayPerson(resultArray)
     break;
     case "family":
@@ -394,19 +394,19 @@ function displayPeople(people){
    }).join("\n"));
 }
 
-function displayPerson(person){
+function displayPerson(person,index){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
  
   
-  let personInfo = "First Name: " + person[0].firstName + "\n";
-  personInfo += "Last Name: " + person[0].lastName + "\n";
-  personInfo += "Gender " + person[0].gender + "\n";
-  personInfo += "Date of Birth " + person[0].dob + "\n";
-  personInfo += "Height " + person[0].height + "\n";
-  personInfo += "Weight " + person[0].weight + "\n";
-  personInfo += "Eye Color " + person[0].eyeColor + "\n";
-  personInfo += "Occupation " + person[0].occupation + "\n";
+  let personInfo = "First Name: " + person[index].firstName + "\n";
+  personInfo += "Last Name: " + person[index].lastName + "\n";
+  personInfo += "Gender " + person[index].gender + "\n";
+  personInfo += "Date of Birth " + person[index].dob + "\n";
+  personInfo += "Height " + person[index].height + "\n";
+  personInfo += "Weight " + person[index].weight + "\n";
+  personInfo += "Eye Color " + person[index].eyeColor + "\n";
+  personInfo += "Occupation " + person[index].occupation + "\n";
       // TODO: finish getting the rest of the information to display.
   alert(personInfo);
 }
