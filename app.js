@@ -362,9 +362,8 @@ function searchByWeight(people){
 function searchByFamily(person, people){
   
   let foundFamily= people.filter(function(potentialMatch){
-
-    
-    if(potentialMatch.parents === person[0].id || potentialMatch.currentSpouse === person[0].id){
+   
+    if(potentialMatch.parents[0] === person[0].id || potentialMatch.parents[1] === person[0].id || potentialMatch.currentSpouse === person[0].id){
       return true;
     }
     else{return false;
@@ -373,7 +372,7 @@ function searchByFamily(person, people){
   })
 
 
-  return foundFamily
+  displayPeople(foundFamily)
 }
 
 
@@ -392,7 +391,8 @@ function displayPeople(people){
   
   alert(people.map(function(person){
     return person.firstName + " " + person.lastName + " "+  person.gender  + " " + ' ' + person.dob + ' ' + person.height +"inches" + " "+  person.weight +"  " + person.eyeColor + " "+  person.occupation
-   }).join("\n"));}
+   }).join("\n"));
+}
 
 function displayPerson(person){
   // print all of the information about a person:
