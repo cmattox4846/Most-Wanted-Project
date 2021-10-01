@@ -22,7 +22,7 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
-      let singleOrMultipleTrait = parseInt(prompt('1 - Search single trait' + '\n' + '2 - Search Muliple traits'))
+      let singleOrMultipleTrait = parseInt(prompt('1 - Search single trait' + '\n' + '2 - Search muliple traits'))
        if (singleOrMultipleTrait === 1 ){
         searchResults = whichTrait(people)
        }
@@ -134,15 +134,22 @@ function choiceTraits(){
 
 
   let triatOptions = parseInt(promptFor('Please choose which triat to search for:' + '\n' + '1 - Eye Color'+ '\n' + '2 - Gender'+ '\n' + '3 - Height'+ '\n' + '4 - Weight'+ '\n' + '5 - Occupation' + '\n'  +'0 - To complete search' , autoValid))
-    if (triatOptions != 0){
-      traits.push(triatOptions)
-        choiceTraits()
-      
+  
+  if (triatOptions != 0 && triatOptions === 1 || triatOptions === 2 || triatOptions === 3 || triatOptions === 4 || triatOptions === 5 || triatOptions === 0 )
+  {
+          traits.push(triatOptions)
+            choiceTraits()
+          
+          }
+      else
+      {
+        
+          alert("Please start over! Only choose one of the options from the list")
+          triats =[]
+          choiceTraits();
+          
       }
-    else{
-      return false
-    }
-   return traits
+        return traits
 }
 
 function multipleTraits(people, traits){
@@ -213,6 +220,10 @@ function multipleTraits(people, traits){
             }   
             
           break;
+          default:
+      alert("Please choose one of the options from the list")
+      multipleTraits(people,traits);
+      break;
     }
 }
  return searchResults
@@ -222,7 +233,7 @@ function whichTrait(people){
  
   
   
-      let choiceTrait = parseInt(promptFor('Please choose which triat to search for:' + '\n' + '1 - Eye Color'+ '\n' + '2 - Gender'+ '\n' + '3 - Height'+ '\n' + '4 - Weight'+ '\n' + '5 - Parents' + '\n' + '6 - Current Spouse', autoValid))
+      let choiceTrait = parseInt(prompt('Please choose which triat to search for:' + '\n' + '1 - Eye Color'+ '\n' + '2 - Gender'+ '\n' + '3 - Height'+ '\n' + '4 - Weight'+ '\n' + '5 - Parents' + '\n' + '6 - Current Spouse'))
         
       let searchResults
       switch(choiceTrait){
@@ -244,7 +255,10 @@ function whichTrait(people){
           case 6:
             searchResults = searchByCurrentSpouse(people)
           break;
-            
+          default:
+      alert("Please choose one of the options from the list")
+      whichTrait(people);
+      break;
         }
         return searchResults
      
@@ -377,7 +391,8 @@ function searchByEyeColor(people){
     break;
     default:
       alert("Please choose one of the options from the list")
-      searchByEyeColor(people)
+      searchByEyeColor(people);
+      break;
       
   }
   return searchResults
