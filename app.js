@@ -8,8 +8,7 @@
 
 // app is the function called to start the entire application
 function app(people){
-  let searchType = null
-  searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+  let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   let searchResults;
   switch(searchType){
     case 'yes':
@@ -21,14 +20,12 @@ function app(people){
         searchResults = whichTrait(people)
        }
        else{
-        choiceTraits()
-        searchResults = multipleTraits(people, traits)
+        searchResults = multipleTraits(people)
        }
-    break;
-    case null:
-      window.location.href = index.html
+       
+      break;
       default:
-    index.html; // restart app
+    app(people); // restart app
       break;
   }
 
@@ -50,52 +47,49 @@ let answer = false
 
   if (person.length > 1){
     
-        let resultArray = displayPeople(person);
-        let question = promptFor("Do you want to go through list 1 by 1? Enter 'yes' or 'no'", yesNo).toLowerCase();
+    let resultArray = displayPeople(person);
 
-        if (question === 'yes'){   
+    let question = promptFor("Do you want to go through list 1 by 1? Enter 'yes' or 'no'", yesNo).toLowerCase();
+   if (question === 'yes'){   
 
-              for(let i=0;i<person.length;i++){
-                
-                
-                let displayOption = promptFor("Found " + person[i].firstName + " " + person[i].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid);
+    for(let i=0;i<person.length;i++){
+      
+      
+  let displayOption = promptFor("Found " + person[i].firstName + " " + person[i].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid);
 
-                switch(displayOption){
-                  case "info":
-                    let singleResult = displayPerson(person, i)
-                    //displayPerson(resultArray)
-                  break;
-                  case "family":
-                    searchByFamily(person, people)
-                  break;
-                  case "descendants":
-                  // TODO: get person's descendants
-                  break;
-                  case "restart":
-                  app(people); // restart
-                  break;
-                  case "quit":
-                  return; // stop execution
-                  default:
-                  return mainMenu(person, people); // ask again
-            }
-        }}
+  switch(displayOption){
+    case "info":
+      let singleResult = displayPerson(person, i)
+      //displayPerson(resultArray)
+    break;
+    case "family":
+      searchByFamily(person, people)
+    break;
+    case "descendants":
+    // TODO: get person's descendants
+    break;
+    case "restart":
+    app(people); // restart
+    break;
+    case "quit":
+    return; // stop execution
+    default:
+    return mainMenu(person, people); // ask again
+  }
+    }}
     else{    
     
     app(people)
     }
-    app(people)
   }
-
   else{
 
-  // this is for the single array return
-
+  
   let displayOption = promptFor("Found " + person[0].firstName + " " + person[0].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid);
 
   switch(displayOption){
     case "info":
-      let singleResult = displayPerson(person, 0)
+      let singleResult = displayPerson(person)
       //displayPerson(resultArray)
     break;
     case "family":
@@ -112,7 +106,6 @@ let answer = false
     default:
     return mainMenu(person, people); // ask again
   }
-  app(people)
 }
 }
 
@@ -139,73 +132,30 @@ function choiceTraits(){
    return traits
 }
 
-function multipleTraits(people, traits){
-  let searchResults = traits
- 
+function multipleTraits(people){
   
-  for(let i=0;i<=traits.length; i++){
-     
-    switch(traits[i]){
+  let chooseTrait = choiceTraits()
+   let searchResults
+  for(let i=0;i<chooseTrait.length; i++){
+        
+    switch(chooseTrait[i]){
           case 1:
-            if (searchResults === traits){
-              searchResults = searchByEyeColor(people)
-            }else{
-              searchResults = searchByEyeColor(searchResults)
-            }           
+            searchResults = searchByEyeColor(people)
           break;
-            case 2:
-              if (searchResults === traits)
-            {
-              searchResults = searchByGender(people)
-            }
-            else
-            {
-              searchResults = searchByGender(searchResults)
-            }   
+          case 2:
+            searchResults = searchByGender(people)
           break;
           case 3:
-            if (searchResults === traits)
-            {
-              searchResults = searchByHeight(people)
-            }
-            else
-            {
-              searchResults = searchByHeight(searchResults)
-            }   
-          
+            searchResults =  searchByHeight(people)
           break;
           case 4:
-            if (searchResults === traits)
-            {
-              searchResults = searchByWeight(people)
-            }
-            else
-            {
-              searchResults = searchByWeight(searchResults)
-            }   
-          
+            searchResults =  searchByWeight(people)
           break;
           case 5:
-            if (searchResults === traits)
-            {
-              searchResults = searchByParents(people)
-            }
-            else
-            {
-              searchResults = searchByParents(searchResults)
-            }   
-            
+            searchResults =  searchByParents(people)
           break;
           case 6:
-            if (searchResults === traits)
-            {
-              searchResults = searchByCurrentSpouse(people)
-            }
-            else
-            {
-              searchResults = searchByCurrentSpouse(searchResults)
-            }   
-            
+            searchResults = searchByCurrentSpouse(people)
           break;
     }
 }
@@ -407,26 +357,53 @@ function searchByWeight(people){
   })
   return weightFound
 }
+let foundParents= []
 
 //Search Family Function
 function searchByFamily(person, people){
   
-  let foundFamily= people.filter(function(potentialMatch){
+  // let foundParents= people.filter(function(potentialMatch){
     //added to test if this will walk through array of people
     
-    if(potentialMatch.parents[0] === person[0].id || potentialMatch.parents[1] === person[0].id || potentialMatch.currentSpouse === person[0].id || 
-    potentialMatch.parents[0] === person[0].parents[0] || potentialMatch.parents[1] === person[0].parents[1] && potentialMatch.id != person[0].id)
-    {
+    if(person[0].parents != null){ 
+      foundParents.push(person[0].parents)
+      // foundParents.push(person[0].parents[1])
+      }
+    else{return false;
+    }
+    let parentsName= people.filter(function(potentialMatch){
+      for(let i=0; i<foundParents.length; i++){     
+      if(potentialMatch.id === foundParents[i]){ 
+        return true;
+      }
+      else{return false;
+      }
+        }
+      })
+  
+  
+  let foundSpouse= people.filter(function(potentialMatch){
+    //added to test if this will walk through array of people
+    
+    if(potentialMatch.currentSpouse === person[0].id){ 
+      return true;
+    }
+    else{return false;
+    }
+      })
+
+  let foundSiblings= people.filter(function(potentialMatch){
+    //added to test if this will walk through array of people
+    
+    if(potentialMatch.parents[0] === person[0].parents[0] || potentialMatch.parents[1] === person[0].parents[1]){ 
       return true;
     }
     else{return false;
     }
       })
   
-  
-  
-
- displayPeople(foundFamily)
+    
+ alert(person[0] + "'s parents are " +  parentsName + "\n" + "Spouse is " + foundSpouse[0] + "\n" + "Siblings are " + foundSiblings)
 }
 
 
@@ -525,20 +502,11 @@ function displayPerson(person,index){
 function promptFor(question, valid){
   let isValid;
   do{
-    var response = prompt(question)
-      if (response != null)
-      {
-        response.trim()
-      
-       isValid = valid(response);
-  }
-}
-      while(response === ""  ||  isValid === false)
+    var response = prompt(question).trim();
+    isValid = valid(response);
+  } while(response === ""  ||  isValid === false)
   return response;
-
-  
 }
-
 
 // helper function/callback to pass into promptFor to validate yes/no answers.
 function yesNo(input){
