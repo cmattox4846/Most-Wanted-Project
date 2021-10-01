@@ -44,12 +44,48 @@ function mainMenu(person, people){
     alert("Could not find that individual.");
     return app(people); // restart
   }
- 
+
+  if (person.length > 1){
+    
+    let resultArray = displayPeople(person)
+    for(i=0;i<person.length;i++){
+      
+      
   let displayOption = promptFor("Found " + person[0].firstName + " " + person[0].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid);
 
   switch(displayOption){
     case "info":
-      let resultArray = displayPeople(person)
+      let singleResult = displayPerson(person)
+      //displayPerson(resultArray)
+      app(people)
+    break;
+    case "family":p
+    // TODO: get person's family
+    break;
+    case "descendants":
+    // TODO: get person's descendants
+    break;
+    case "restart":
+    app(people); // restart
+    break;
+    case "quit":
+    return; // stop execution
+    default:
+    return mainMenu(person, people); // ask again
+  }
+    }
+    
+    
+    mainMenu(person, people)
+  }
+  else{
+
+  
+  let displayOption = promptFor("Found " + person[0].firstName + " " + person[0].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid);
+
+  switch(displayOption){
+    case "info":
+      let singleResult = displayPerson(person)
       //displayPerson(resultArray)
       app(people)
     break;
@@ -68,6 +104,7 @@ function mainMenu(person, people){
     return mainMenu(person, people); // ask again
   }
 }
+}
 
 //#endregion
 
@@ -75,9 +112,9 @@ function mainMenu(person, people){
 //Ideally you will have a function for each trait.
 /////////////////////////////////////////////////////////////////
 //#region 
-
+let traits =[]  
 function choiceTraits(){
-  let traits =[]  
+  
 
 
   let triatOptions = parseInt(prompt('Please choose which triat to search for:' + '\n' + '1 - Eye Color'+ '\n' + '2 - Gender'+ '\n' + '3 - Height'+ '\n' + '4 - Weight'+ '\n' + '5 - Occupation' + '\n'  +'0 - To complete search' ))
@@ -99,22 +136,22 @@ function multipleTraits(people){
   for(let i=0;i<chooseTrait.length; i++){
         
     switch(chooseTrait[i]){
-          case "1":
+          case 1:
             searchResults = searchByEyeColor(people)
           break;
-          case "2":
+          case 2:
             searchResults = searchByGender(people)
           break;
-          case "3":
+          case 3:
             searchResults =  searchByHeight(people)
           break;
-          case "4":
+          case 4:
             searchResults =  searchByWeight(people)
           break;
-          case "5":
+          case 5:
             searchResults =  searchByParents(people)
           break;
-          case '6':
+          case 6:
             searchResults = searchByCurrentSpouse(people)
           break;
     }
@@ -153,31 +190,7 @@ function whichTrait(people){
         return searchResults
       
  
-  // else{
-  //       let chooseTrait = choiceTraits()
-        
-  //         switch(choiceTrait){
-  //           case "1":
-  //             searchResults = searchByEyeColor(people)
-  //           break;
-  //           case "2":
-  //             searchResults = searchByGender(people)
-  //           break;
-  //           case "3":
-  //             searchResults =  searchByHeight(people)
-  //           break;
-  //           case "4":
-  //             searchResults =  searchByWeight(people)
-  //           break;
-  //           case "5":
-  //             searchResults =  searchByParents(people)
-  //           break;
-  //           case '6':
-  //             searchResults = searchByCurrentSpouse(people)
-  //           break;
-    
-
-  // }
+  
 }
 
 function searchByHeight(people)
