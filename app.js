@@ -362,19 +362,36 @@ function searchByWeight(people){
 function searchByFamily(person, people){
   
   let foundFamily= people.filter(function(potentialMatch){
-   
-    if(potentialMatch.parents[0] === person[0].id || potentialMatch.parents[1] === person[0].id || potentialMatch.currentSpouse === person[0].id){
+    //added to test if this will walk through array of people
+    
+    if(potentialMatch.parents[0] === person[0].id || potentialMatch.parents[1] === person[0].id || potentialMatch.currentSpouse === person[0].id || 
+    potentialMatch.parents[0] === person[0].parents[0] || potentialMatch.parents[1] === person[0].parents[1] && potentialMatch.id != person[0].id)
+    {
       return true;
     }
     else{return false;
     }
+      })
   
-  })
+  
+  
 
-
-  displayPeople(foundFamily)
+ displayPeople(foundFamily)
 }
 
+
+// function searchForGrandKids(anArray, person){
+
+//   let foundEveryone= anArray.filter(function(potentionalMatch){
+//     if(potentialMatch.parents[0] === person[i].id || potentialMatch.parents[1] === person[i].id || potentialMatch.currentSpouse === person[i].id){
+//     return true;
+//   }
+//   else{return false;}
+
+//   })
+// return foundEveryone
+
+// }
 
 //#endregion
 
@@ -393,6 +410,36 @@ function displayPeople(people){
     return person.firstName + " " + person.lastName + " "+  person.gender  + " " + ' ' + person.dob + ' ' + person.height +"inches" + " "+  person.weight +"  " + person.eyeColor + " "+  person.occupation
    }).join("\n"));
 }
+
+//family dispaly function
+
+// function displayFamily(){
+// //for dad
+// if(id === parents[0].id || id === parents[1] && person.gender === male){
+
+// }
+
+// //for mom
+// else if(id === parents[0].id || id === parents[1] && person.gender === female){
+
+// }
+
+// //husband
+// else if(id === currentSpouse && person.gender === male){
+
+// }
+
+
+// //wife
+// else if(id === currentSpouse && person.gender === female){
+
+// }
+
+// //siblings
+// parents[0].id === id || parents[1].id === id
+
+
+// }
 
 function displayPerson(person,index){
   // print all of the information about a person:
