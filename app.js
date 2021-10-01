@@ -8,7 +8,18 @@
 
 // app is the function called to start the entire application
 function app(people){
+<<<<<<< HEAD
   let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+=======
+  let searchType = null
+  searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo);
+  if (searchType === null){
+    window.location.href = "index.html"
+  }else{
+    searchType.toLowerCase();
+  }
+
+>>>>>>> 27eeec64b97aeb76935d859e8d030d924c88440d
   let searchResults;
   switch(searchType){
     case 'yes':
@@ -22,10 +33,18 @@ function app(people){
        else{
         searchResults = multipleTraits(people)
        }
+<<<<<<< HEAD
        
       break;
       default:
     app(people); // restart app
+=======
+    break;
+    case null:
+      window.location.href = "index.html"
+      default:
+        window.location.href = "index.html"; // restart app
+>>>>>>> 27eeec64b97aeb76935d859e8d030d924c88440d
       break;
   }
 
@@ -42,7 +61,7 @@ function mainMenu(person, people){
 let answer = false
   if(!person){
     alert("Could not find that individual.");
-    return app(people); // restart
+    return window.location.href = "index.html"//app(people); // restart
   }
 
   if (person.length > 1){
@@ -120,7 +139,7 @@ function choiceTraits(){
   
 
 
-  let triatOptions = parseInt(prompt('Please choose which triat to search for:' + '\n' + '1 - Eye Color'+ '\n' + '2 - Gender'+ '\n' + '3 - Height'+ '\n' + '4 - Weight'+ '\n' + '5 - Occupation' + '\n'  +'0 - To complete search' ))
+  let triatOptions = parseInt(promptFor('Please choose which triat to search for:' + '\n' + '1 - Eye Color'+ '\n' + '2 - Gender'+ '\n' + '3 - Height'+ '\n' + '4 - Weight'+ '\n' + '5 - Occupation' + '\n'  +'0 - To complete search' , autoValid))
     if (triatOptions != 0){
       traits.push(triatOptions)
         choiceTraits()
@@ -166,7 +185,7 @@ function whichTrait(people){
  
   
   
-      let choiceTrait = parseInt(prompt('Please choose which triat to search for:' + '\n' + '1 - Eye Color'+ '\n' + '2 - Gender'+ '\n' + '3 - Height'+ '\n' + '4 - Weight'+ '\n' + '5 - Parents' + '\n' + '6 - Current Spouse' ))
+      let choiceTrait = parseInt(promptFor('Please choose which triat to search for:' + '\n' + '1 - Eye Color'+ '\n' + '2 - Gender'+ '\n' + '3 - Height'+ '\n' + '4 - Weight'+ '\n' + '5 - Parents' + '\n' + '6 - Current Spouse', autoValid))
         
       let searchResults
       switch(choiceTrait){
@@ -198,13 +217,13 @@ function whichTrait(people){
 
 function searchByHeight(people)
 {
-  let heightType = parseInt(prompt('What do you want to search for:' +'\n' +' 1 - Search Below height' +'\n'+ '2 - Above this height '))
+  let heightType = parseInt(promptFor('What do you want to search for:' +'\n' +' 1 - Search Below height' +'\n'+ '2 - Above this height ',autoValid))
   let heightAmount = ""
   let searchResults
 
     if (heightType === 1)
     {
-      heightAmount = parseInt(prompt('Please enter the height in inches to search below:'))
+      heightAmount = parseInt(promptFor('Please enter the height in inches to search below:',autoValid))
       let foundPerson = people.filter(function(potentialMatch){
       if (potentialMatch.height <= heightAmount)
       {
@@ -220,7 +239,7 @@ function searchByHeight(people)
     }
 
     else{
-      heightAmount = parseInt(prompt('Please enter the height in inches to search above:'))
+      heightAmount = parseInt(promptFor('Please enter the height in inches to search above:',autoValid))
       let foundPerson = people.filter(function(potentialMatch)
       {
         if (potentialMatch.height >= heightAmount)
@@ -260,7 +279,7 @@ function searchByName(people){
 
 function searchByEyeColor(people){
   
-  let eyeColor = promptFor('Please choose an eye color to search for:' + '\n' + '1 - Blue'+ '\n' + '2 - Hazel'+ '\n' + '3 - Black'+ '\n' + '4 - Green'+ '\n' + '5 - Brown', autoValid);
+  let eyeColor = prompt('Please choose an eye color to search for:' + '\n' + '1 - Blue'+ '\n' + '2 - Hazel'+ '\n' + '3 - Black'+ '\n' + '4 - Green'+ '\n' + '5 - Brown');
   let searchResults 
   switch(eyeColor){
     case "1":
@@ -319,6 +338,9 @@ function searchByEyeColor(people){
       })
       searchResults = eyeColorBrown
     break;
+    default:
+      alert("Please choose one of the options from the list")
+      searchByEyeColor(people)
       
   }
   return searchResults
@@ -346,16 +368,45 @@ function searchByGender(people){
 
 //Function used to search through an array of people to find matching users defined weight and return an array.
 function searchByWeight(people){
-  let weight= parseInt(promptFor("how much does the person weight?", autoValid))
-  
-  let weightFound= people.filter(function(potentialMatch){
-    if(potentialMatch.weight === weight){
-      return true;
+  let weightType = parseInt(promptFor('What do you want to search for:' +'\n' +' 1 - Search people weighing below amount:' +'\n'+ '2 - Search people weighing above amount: ',autoValid))
+  let weightAmount = ""
+  let searchResults
+
+    if (weightType === 1)
+    {
+      weightAmount = parseInt(promptFor('Please enter the weight to search below:',autoValid))
+      let foundPerson = people.filter(function(potentialMatch){
+      if (potentialMatch.height <= weightAmount)
+      {
+        return true;
+      }
+      else{
+        return false;
+      }
+             
+       ;
+      })
+      searchResults = foundPerson
     }
-    else{return false;
+
+    else{
+      weightAmount = parseInt(promptFor('Please enter the weight to search above:',autoValid))
+      let foundPerson = people.filter(function(potentialMatch)
+      {
+        if (potentialMatch.height >= weightAmount)
+        {
+          return true;
+        }
+        else{
+          return false;
+        }
+                  
+         ;
+        })
+      searchResults = foundPerson
     }
-  })
-  return weightFound
+
+    return searchResults
 }
 let foundParents= []
 
@@ -502,9 +553,24 @@ function displayPerson(person,index){
 function promptFor(question, valid){
   let isValid;
   do{
+<<<<<<< HEAD
     var response = prompt(question).trim();
     isValid = valid(response);
   } while(response === ""  ||  isValid === false)
+=======
+    var response = prompt(question)
+      if (response != null)
+      {
+        response.trim()
+      
+       isValid = valid(response);
+  }
+  else{
+    window.location.href = "index.html"
+  }
+}
+      while(response === ""  ||  isValid === false)
+>>>>>>> 27eeec64b97aeb76935d859e8d030d924c88440d
   return response;
 }
 
@@ -513,7 +579,9 @@ function yesNo(input){
   if(input.toLowerCase() == "yes" || input.toLowerCase() == "no"){
     return true;
   }
-  else{
+  else if(input === null){
+    window.location.href = "index.html"
+  }else{  
     return false;
   }
 }
