@@ -8,9 +8,6 @@
 
 // app is the function called to start the entire application
 function app(people){
-<<<<<<< HEAD
-  let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
-=======
   let searchType = null
   searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo);
   if (searchType === null){
@@ -19,7 +16,6 @@ function app(people){
     searchType.toLowerCase();
   }
 
->>>>>>> 27eeec64b97aeb76935d859e8d030d924c88440d
   let searchResults;
   switch(searchType){
     case 'yes':
@@ -33,18 +29,11 @@ function app(people){
        else{
         searchResults = multipleTraits(people)
        }
-<<<<<<< HEAD
-       
-      break;
-      default:
-    app(people); // restart app
-=======
     break;
     case null:
       window.location.href = "index.html"
       default:
         window.location.href = "index.html"; // restart app
->>>>>>> 27eeec64b97aeb76935d859e8d030d924c88440d
       break;
   }
 
@@ -411,52 +400,67 @@ function searchByWeight(people){
 let foundParents= []
 
 //Search Family Function
+// function searchByFamily(person, people){
+  
+//   // let foundParents= people.filter(function(potentialMatch){
+//     //added to test if this will walk through array of people
+    
+//     if(person[0].parents != null){ 
+//       foundParents.push(person[0].parents)
+//       // foundParents.push(person[0].parents[1])
+//       }
+//     else{return false;
+//     }
+//     let parentsName= people.filter(function(potentialMatch){
+//       for(let i=0; i<foundParents.length; i++){     
+//       if(potentialMatch.id === foundParents[i]){ 
+//         return true;
+//       }
+//       else{return false;
+//       }
+//         }
+//       })
+  
+  
+//   let foundSpouse= people.filter(function(potentialMatch){
+//     //added to test if this will walk through array of people
+    
+//     if(potentialMatch.currentSpouse === person[0].id){ 
+//       return true;
+//     }
+//     else{return false;
+//     }
+//       })
+
+//   let foundSiblings= people.filter(function(potentialMatch){
+//     //added to test if this will walk through array of people
+    
+//     if(potentialMatch.parents[0] === person[0].parents[0] || potentialMatch.parents[1] === person[0].parents[1]){ 
+//       return true;
+//     }
+//     else{return false;
+//     }
+//       })
+  
+    
+//  alert(person[0] + "'s parents are " +  parentsName + "\n" + "Spouse is " + foundSpouse[0] + "\n" + "Siblings are " + foundSiblings)
+// }
+
+
 function searchByFamily(person, people){
-  
-  // let foundParents= people.filter(function(potentialMatch){
-    //added to test if this will walk through array of people
-    
-    if(person[0].parents != null){ 
-      foundParents.push(person[0].parents)
-      // foundParents.push(person[0].parents[1])
-      }
-    else{return false;
-    }
-    let parentsName= people.filter(function(potentialMatch){
-      for(let i=0; i<foundParents.length; i++){     
-      if(potentialMatch.id === foundParents[i]){ 
-        return true;
-      }
-      else{return false;
-      }
-        }
-      })
-  
-  
-  let foundSpouse= people.filter(function(potentialMatch){
-    //added to test if this will walk through array of people
-    
-    if(potentialMatch.currentSpouse === person[0].id){ 
-      return true;
-    }
-    else{return false;
-    }
-      })
+  let foundFamily= people.filter(function(potentialMatch){
 
-  let foundSiblings= people.filter(function(potentialMatch){
-    //added to test if this will walk through array of people
-    
-    if(potentialMatch.parents[0] === person[0].parents[0] || potentialMatch.parents[1] === person[0].parents[1]){ 
+    if(person[0].id === potentialMatch.parents[0] || person[0].id === potentialMatch.parents[1] ||person[0].parents[0] === potentialMatch.id ||  
+       person[0].id === potentialMatch.currentSpouse || person[0].parents[0] === potentialMatch.parents[0]){
       return true;
     }
-    else{return false;
+    else{
+      return false;
     }
-      })
+  })
+ displayFamily(person, foundFamily)
   
-    
- alert(person[0] + "'s parents are " +  parentsName + "\n" + "Spouse is " + foundSpouse[0] + "\n" + "Siblings are " + foundSiblings)
 }
-
 
 // function searchForGrandKids(anArray, person){
 
@@ -491,33 +495,56 @@ function displayPeople(people){
 
 //family dispaly function
 
-// function displayFamily(){
-// //for dad
-// if(id === parents[0].id || id === parents[1] && person.gender === male){
+function displayFamily(person, someArray){
+let dad
+let mom
+let husband
+let wife
+let siblings
+someArray
+  person.map(function(person, someArray){
+    for(let i=0;i<someArray.length; i++){
+      someArray[i]
+//for dad
+    if(person[0].id === someArray[i].parents[0].id || person[0].id === someArray[i].parents[1] && someArray[i].gender === male){
+    dad= someArray.firstName + " " + someArray.lastName
+    return dad;
+   }
 
-// }
+//for mom
+    else if(person[0].id === someArray[i].id || person[0].id === parents[1] && person[0].gender === female){
+    mom= someArray.firstName + " " + someArray.lastName
+    return mom;
+    }
 
-// //for mom
-// else if(id === parents[0].id || id === parents[1] && person.gender === female){
-
-// }
-
-// //husband
-// else if(id === currentSpouse && person.gender === male){
-
-// }
-
-
-// //wife
-// else if(id === currentSpouse && person.gender === female){
-
-// }
-
-// //siblings
-// parents[0].id === id || parents[1].id === id
+//husband
+    else if(person[0].id === someArray[i].currentSpouse && person[0].gender === male){
+    husband = someArray.firstName + " " + someArray.lastName
+    return husband;
+    }
 
 
-// }
+//wife
+    else if(person[0].id === someArray[i].currentSpouse && person[0].gender === female){
+    wife = someArray.firstName + " " + someArray.lastName
+    return wife;
+    }
+
+//siblings
+    else if(parents[0].id === someArray[i].id || parents[1].id === someArray[i].id){
+    siblings= someArray.firstName + " " + someArray.lastName
+    return siblings;
+    }
+  }
+alert(`the farther is ${dad}\n the mother is ${mom}\n the husband is ${husband}\n the wife is ${wife}\n the siblings are ${siblings}`)
+})
+
+}
+
+
+
+
+
 
 function displayPerson(person,index){
   // print all of the information about a person:
@@ -553,11 +580,6 @@ function displayPerson(person,index){
 function promptFor(question, valid){
   let isValid;
   do{
-<<<<<<< HEAD
-    var response = prompt(question).trim();
-    isValid = valid(response);
-  } while(response === ""  ||  isValid === false)
-=======
     var response = prompt(question)
       if (response != null)
       {
@@ -570,7 +592,6 @@ function promptFor(question, valid){
   }
 }
       while(response === ""  ||  isValid === false)
->>>>>>> 27eeec64b97aeb76935d859e8d030d924c88440d
   return response;
 }
 
