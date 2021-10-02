@@ -508,7 +508,8 @@ function displayPeople(people){
    }).join("\n"));
 }
 
-//family dispaly function
+//New family dispaly function
+//Almost working, just needs to get the values of the family to show up in the someArray arguement as its passing through the if Statement.
 
 function displayFamily(person, someArray){
 let dad
