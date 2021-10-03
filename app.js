@@ -412,39 +412,62 @@ function searchByWeight(people){
 
     return searchResults
 }
-let foundParents= []
+
+
+
+
+
+
+
 
 //Search Family Function
+
+
+let foundParents= []
+let foundParent1 = ""
+let foundParent2 =""
+let parentsName =[]
+let foundSpouse
+
 function searchByFamily(person, people){
   
   // let foundParents= people.filter(function(potentialMatch){
     //added to test if this will walk through array of people
     
     if(person[0].parents != null){ 
-      foundParents.push(person[0].parents)
+       foundParent1 = toString(person[0].parents[0]);
+       foundParent2 = toString(person[0].parents[1]);
+      
+      //foundParents.push(person[0].parents)
       // foundParents.push(person[0].parents[1])
       }
-    else{return false;
+    else
+    {return false;
     }
-    let parentsName= people.filter(function(potentialMatch){
-      for(let i=0; i<foundParents.length; i++){     
-      if(potentialMatch.id === foundParents[i]){ 
+    parentsName= people.filter(function(potentialMatch){
+      
+     /// for(let i=0; i<foundParents.length; i++){     
+      if(potentialMatch.id === foundParent1 || potentialMatch.id === foundParent2){ 
         return true;
       }
       else{return false;
       }
         }
-      })
+    )
   
   
-  let foundSpouse= people.filter(function(potentialMatch){
+    foundSpouse = people.filter(function(potentialMatch){
     //added to test if this will walk through array of people
-    
-    if(potentialMatch.currentSpouse === person[0].id){ 
+    if(person[0].currentSpouse != null){ 
+    if(potentialMatch.currentSpouse === person[0].currentSpouse){ 
       return true;
     }
     else{return false;
     }
+  }else{
+    foundSpouse = 'No Spouse Found!'
+    
+  }
       })
 
   let foundSiblings= people.filter(function(potentialMatch){
@@ -458,7 +481,7 @@ function searchByFamily(person, people){
       })
   
     
- alert(person[0] + "'s parents are " +  parentsName + "\n" + "Spouse is " + foundSpouse[0] + "\n" + "Siblings are " + foundSiblings)
+ alert(person[0] + "'s parents are " +  parentsName + "\n" + "Spouse is " + foundSpouse + "\n" + "Siblings are " + foundSiblings)
 }
 
 
