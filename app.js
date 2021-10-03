@@ -421,6 +421,7 @@ function searchByWeight(people){
 
 
 //Search Family Function
+<<<<<<< HEAD
 
 
 let foundParents= []
@@ -430,10 +431,14 @@ let parentsName =[]
 let foundSpouse
 
 function searchByFamily(person, people){
+=======
+// function searchByFamily(person, people){
+>>>>>>> 854b352673961398524a44057c6d9fb26557f54e
   
-  // let foundParents= people.filter(function(potentialMatch){
-    //added to test if this will walk through array of people
+//   // let foundParents= people.filter(function(potentialMatch){
+//     //added to test if this will walk through array of people
     
+<<<<<<< HEAD
     if(person[0].parents != null){ 
        foundParent1 = toString(person[0].parents[0]);
        foundParent2 = toString(person[0].parents[1]);
@@ -472,18 +477,69 @@ function searchByFamily(person, people){
 
   let foundSiblings= people.filter(function(potentialMatch){
     //added to test if this will walk through array of people
+=======
+//     if(person[0].parents != null){ 
+//       foundParents.push(person[0].parents)
+//       // foundParents.push(person[0].parents[1])
+//       }
+//     else{return false;
+//     }
+//     let parentsName= people.filter(function(potentialMatch){
+//       for(let i=0; i<foundParents.length; i++){     
+//       if(potentialMatch.id === foundParents[i]){ 
+//         return true;
+//       }
+//       else{return false;
+//       }
+//         }
+//       })
+  
+  
+//   let foundSpouse= people.filter(function(potentialMatch){
+//     //added to test if this will walk through array of people
     
-    if(potentialMatch.parents[0] === person[0].parents[0] || potentialMatch.parents[1] === person[0].parents[1]){ 
+//     if(potentialMatch.currentSpouse === person[0].id){ 
+//       return true;
+//     }
+//     else{return false;
+//     }
+//       })
+
+//   let foundSiblings= people.filter(function(potentialMatch){
+//     //added to test if this will walk through array of people
+    
+//     if(potentialMatch.parents[0] === person[0].parents[0] || potentialMatch.parents[1] === person[0].parents[1]){ 
+//       return true;
+//     }
+//     else{return false;
+//     }
+//       })
+  
+>>>>>>> 854b352673961398524a44057c6d9fb26557f54e
+    
+//  alert(person[0] + "'s parents are " +  parentsName + "\n" + "Spouse is " + foundSpouse[0] + "\n" + "Siblings are " + foundSiblings)
+// }
+
+
+function searchByFamily(person, people){
+  let foundFamily= people.filter(function(potentialMatch){
+
+    if(person[0].id === potentialMatch.parents[0] || person[0].id === potentialMatch.parents[1] ||person[0].parents[0] === potentialMatch.id ||  
+       person[0].id === potentialMatch.currentSpouse || person[0].parents[0] === potentialMatch.parents[0]){
       return true;
     }
-    else{return false;
+    else{
+      return false;
     }
-      })
+  })
+ displayFamily(person, foundFamily)
   
+<<<<<<< HEAD
     
  alert(person[0] + "'s parents are " +  parentsName + "\n" + "Spouse is " + foundSpouse + "\n" + "Siblings are " + foundSiblings)
+=======
+>>>>>>> 854b352673961398524a44057c6d9fb26557f54e
 }
-
 
 // function searchForGrandKids(anArray, person){
 
@@ -516,35 +572,59 @@ function displayPeople(people){
    }).join("\n"));
 }
 
-//family dispaly function
+//New family dispaly function
+//Almost working, just needs to get the values of the family to show up in the someArray arguement as its passing through the if Statement.
 
-// function displayFamily(){
-// //for dad
-// if(id === parents[0].id || id === parents[1] && person.gender === male){
+function displayFamily(person, someArray){
+let dad
+let mom
+let husband
+let wife
+let siblings
+someArray
+  person.map(function(person, someArray){
+    for(let i=0;i<someArray.length; i++){
+      someArray[i]
+//for dad
+    if(person[0].id === someArray[i].parents[0].id || person[0].id === someArray[i].parents[1] && someArray[i].gender === male){
+    dad= someArray.firstName + " " + someArray.lastName
+    return dad;
+   }
 
-// }
+//for mom
+    else if(person[0].id === someArray[i].id || person[0].id === parents[1] && person[0].gender === female){
+    mom= someArray.firstName + " " + someArray.lastName
+    return mom;
+    }
 
-// //for mom
-// else if(id === parents[0].id || id === parents[1] && person.gender === female){
-
-// }
-
-// //husband
-// else if(id === currentSpouse && person.gender === male){
-
-// }
-
-
-// //wife
-// else if(id === currentSpouse && person.gender === female){
-
-// }
-
-// //siblings
-// parents[0].id === id || parents[1].id === id
+//husband
+    else if(person[0].id === someArray[i].currentSpouse && person[0].gender === male){
+    husband = someArray.firstName + " " + someArray.lastName
+    return husband;
+    }
 
 
-// }
+//wife
+    else if(person[0].id === someArray[i].currentSpouse && person[0].gender === female){
+    wife = someArray.firstName + " " + someArray.lastName
+    return wife;
+    }
+
+//siblings
+    else if(parents[0].id === someArray[i].id || parents[1].id === someArray[i].id){
+    siblings= someArray.firstName + " " + someArray.lastName
+    return siblings;
+    }
+  }
+alert(`the farther is ${dad}\n the mother is ${mom}\n the husband is ${husband}\n the wife is ${wife}\n the siblings are ${siblings}`)
+})
+
+}
+
+
+
+
+
 
 function displayPerson(person,index){
   // print all of the information about a person:
