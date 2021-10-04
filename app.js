@@ -74,7 +74,7 @@ let answer = false
       searchByFamily(person, people)
     break;
     case "descendants":
-    // TODO: get person's descendants
+
     break;
     case "restart":
     app(people); // restart
@@ -104,7 +104,7 @@ let answer = false
     searchByFamily(person, people)
     break;
     case "descendants":
-    // TODO: get person's descendants
+      searchForGrandKs(person, people)
     break;
     case "restart":
     app(people); // restart
@@ -465,8 +465,9 @@ let foundParents= []
 function searchByFamily(person, people){
   let foundFamily= people.filter(function(potentialMatch){
 
-    if(person[0].id === potentialMatch.parents[0] || person[0].id === potentialMatch.parents[1] ||person[0].parents[0] === potentialMatch.id ||  
-       person[0].id === potentialMatch.currentSpouse || person[0].parents[0] === potentialMatch.parents[0]){
+    if((person[0].id != potentialMatch.id && person[0].id === potentialMatch.parents[0]) || (person[0].id != potentialMatch.id && person[0].id === potentialMatch.parents[1]) || 
+      (person[0].id != potentialMatch.id && person[0].parents[0] === potentialMatch.id) || (person[0].id != potentialMatch.id && 
+       person[0].id === potentialMatch.currentSpouse) || person[0].id != potentialMatch.id && person[0].parents[0] === potentialMatch.parents[0]){
       return true;
     }
     else{
@@ -477,18 +478,19 @@ function searchByFamily(person, people){
   
 }
 
-// function searchForGrandKids(anArray, person){
+function searchForGrandKs(person, people){
+ 
+  let foundKids= people.filter(function(potentialMatch){
+    if(person[0].id === potentialMatch.parents[0] || person[0].id === potentialMatch.parents[1]){
 
-//   let foundEveryone= anArray.filter(function(potentionalMatch){
-//     if(potentialMatch.parents[0] === person[i].id || potentialMatch.parents[1] === person[i].id || potentialMatch.currentSpouse === person[i].id){
-//     return true;
-//   }
-//   else{return false;}
+   return true;
+  }
+  })
+  foundKids
+displayPeople(foundKids)
 
-//   })
-// return foundEveryone
-
-// }
+  
+}
 
 //#endregion
 
@@ -512,50 +514,37 @@ function displayPeople(people){
 //Almost working, just needs to get the values of the family to show up in the someArray arguement as its passing through the if Statement.
 
 function displayFamily(person, someArray){
-let dad
-let mom
-let husband
-let wife
-let siblings
+let parent= []
+let spouse= []
+let siblings=[]
 someArray
-  person.map(function(person, someArray){
+ 
     for(let i=0;i<someArray.length; i++){
       someArray[i]
-//for dad
-    if(person[0].id === someArray[i].parents[0].id || person[0].id === someArray[i].parents[1] && someArray[i].gender === male){
-    dad= someArray.firstName + " " + someArray.lastName
-    return dad;
+//for parent
+    if(person[0].parents[0] === someArray[i].id || person[0].parents[1] === someArray[i].id){
+    let parentalFigure= someArray[i].firstName + " " + someArray[i].lastName
+    parent= parentalFigure
    }
 
-//for mom
-    else if(person[0].id === someArray[i].id || person[0].id === parents[1] && person[0].gender === female){
-    mom= someArray.firstName + " " + someArray.lastName
-    return mom;
+
+//spouse
+    else if(person[0].id === someArray[i].currentSpouse){
+    let foundSpouse = someArray[i].firstName + " " + someArray[i].lastName
+    spouse= foundSpouse
     }
 
-//husband
-    else if(person[0].id === someArray[i].currentSpouse && person[0].gender === male){
-    husband = someArray.firstName + " " + someArray.lastName
-    return husband;
-    }
-
-
-//wife
-    else if(person[0].id === someArray[i].currentSpouse && person[0].gender === female){
-    wife = someArray.firstName + " " + someArray.lastName
-    return wife;
-    }
 
 //siblings
-    else if(parents[0].id === someArray[i].id || parents[1].id === someArray[i].id){
-    siblings= someArray.firstName + " " + someArray.lastName
-    return siblings;
+    else if(person[0].parents[0] === someArray[i].parents[0] || person[0].id === someArray[i].parents[1]){
+    let kids= someArray[i].firstName + " " + someArray[i].lastName + " "
+    siblings.push(kids)
     }
   }
-alert(`the farther is ${dad}\n the mother is ${mom}\n the husband is ${husband}\n the wife is ${wife}\n the siblings are ${siblings}`)
-})
-
+alert(`The parents are ${parent}\n The spouse ${spouse}\n the siblings are ${siblings}`)
 }
+
+
 
 
 
