@@ -97,11 +97,12 @@ let answer = false
 
   switch(displayOption){
     case "info":
-      let singleResult = displayPerson(person)
+      let singleResult = displayPerson(person, 0)
       //displayPerson(resultArray)
     break;
     case "family":
-    searchByFamily(person, people)
+   familySearch(person, people)
+
     break;
     case "descendants":
     // TODO: get person's descendants
@@ -263,8 +264,12 @@ function searchByHeight(people)
 
 //Function used to search through an array of people to find matching first and last name and return a SINGLE person object.
 function searchByName(people){
-  let firstName = promptFor("What is the person's first name?", autoValid);
-  let lastName = promptFor("What is the person's last name?", autoValid);
+  let firstNameInput = promptFor("What is the person's first name?", autoValid);
+  let lastNameInput = promptFor("What is the person's last name?", autoValid);
+
+  
+  let firstName = firstNameInput.charAt(0).toUpperCase() + firstNameInput.slice(1);
+  let lastName = lastNameInput.charAt(0).toUpperCase() + lastNameInput.slice(1);
 
   let foundPerson = people.filter(function(potentialMatch){
     if(potentialMatch.firstName === firstName && potentialMatch.lastName === lastName){
@@ -413,157 +418,6 @@ function searchByWeight(people){
     return searchResults
 }
 
-
-
-
-
-
-
-
-//Search Family Function
-<<<<<<< HEAD
-
-
-let foundParents= []
-let foundParent1 = ""
-let foundParent2 =""
-let parentsName =[]
-let foundSpouse
-
-function searchByFamily(person, people){
-=======
-// function searchByFamily(person, people){
->>>>>>> 854b352673961398524a44057c6d9fb26557f54e
-  
-//   // let foundParents= people.filter(function(potentialMatch){
-//     //added to test if this will walk through array of people
-    
-<<<<<<< HEAD
-    if(person[0].parents != null){ 
-       foundParent1 = toString(person[0].parents[0]);
-       foundParent2 = toString(person[0].parents[1]);
-      
-      //foundParents.push(person[0].parents)
-      // foundParents.push(person[0].parents[1])
-      }
-    else
-    {return false;
-    }
-    parentsName= people.filter(function(potentialMatch){
-      
-     /// for(let i=0; i<foundParents.length; i++){     
-      if(potentialMatch.id === foundParent1 || potentialMatch.id === foundParent2){ 
-        return true;
-      }
-      else{return false;
-      }
-        }
-    )
-  
-  
-    foundSpouse = people.filter(function(potentialMatch){
-    //added to test if this will walk through array of people
-    if(person[0].currentSpouse != null){ 
-    if(potentialMatch.currentSpouse === person[0].currentSpouse){ 
-      return true;
-    }
-    else{return false;
-    }
-  }else{
-    foundSpouse = 'No Spouse Found!'
-    
-  }
-      })
-
-  let foundSiblings= people.filter(function(potentialMatch){
-    //added to test if this will walk through array of people
-=======
-//     if(person[0].parents != null){ 
-//       foundParents.push(person[0].parents)
-//       // foundParents.push(person[0].parents[1])
-//       }
-//     else{return false;
-//     }
-//     let parentsName= people.filter(function(potentialMatch){
-//       for(let i=0; i<foundParents.length; i++){     
-//       if(potentialMatch.id === foundParents[i]){ 
-//         return true;
-//       }
-//       else{return false;
-//       }
-//         }
-//       })
-  
-  
-//   let foundSpouse= people.filter(function(potentialMatch){
-//     //added to test if this will walk through array of people
-    
-//     if(potentialMatch.currentSpouse === person[0].id){ 
-//       return true;
-//     }
-//     else{return false;
-//     }
-//       })
-
-//   let foundSiblings= people.filter(function(potentialMatch){
-//     //added to test if this will walk through array of people
-    
-//     if(potentialMatch.parents[0] === person[0].parents[0] || potentialMatch.parents[1] === person[0].parents[1]){ 
-//       return true;
-//     }
-//     else{return false;
-//     }
-//       })
-  
->>>>>>> 854b352673961398524a44057c6d9fb26557f54e
-    
-//  alert(person[0] + "'s parents are " +  parentsName + "\n" + "Spouse is " + foundSpouse[0] + "\n" + "Siblings are " + foundSiblings)
-// }
-
-
-function searchByFamily(person, people){
-  let foundFamily= people.filter(function(potentialMatch){
-
-    if(person[0].id === potentialMatch.parents[0] || person[0].id === potentialMatch.parents[1] ||person[0].parents[0] === potentialMatch.id ||  
-       person[0].id === potentialMatch.currentSpouse || person[0].parents[0] === potentialMatch.parents[0]){
-      return true;
-    }
-    else{
-      return false;
-    }
-  })
- displayFamily(person, foundFamily)
-  
-<<<<<<< HEAD
-    
- alert(person[0] + "'s parents are " +  parentsName + "\n" + "Spouse is " + foundSpouse + "\n" + "Siblings are " + foundSiblings)
-=======
->>>>>>> 854b352673961398524a44057c6d9fb26557f54e
-}
-
-// function searchForGrandKids(anArray, person){
-
-//   let foundEveryone= anArray.filter(function(potentionalMatch){
-//     if(potentialMatch.parents[0] === person[i].id || potentialMatch.parents[1] === person[i].id || potentialMatch.currentSpouse === person[i].id){
-//     return true;
-//   }
-//   else{return false;}
-
-//   })
-// return foundEveryone
-
-// }
-
-//#endregion
-
-//Display functions.
-//Functions for user interface.
-/////////////////////////////////////////////////////////////////
-//#region 
-
-
-
-
 // alerts a list of people
 function displayPeople(people){
   
@@ -572,61 +426,8 @@ function displayPeople(people){
    }).join("\n"));
 }
 
-//New family dispaly function
-//Almost working, just needs to get the values of the family to show up in the someArray arguement as its passing through the if Statement.
 
-function displayFamily(person, someArray){
-let dad
-let mom
-let husband
-let wife
-let siblings
-someArray
-  person.map(function(person, someArray){
-    for(let i=0;i<someArray.length; i++){
-      someArray[i]
-//for dad
-    if(person[0].id === someArray[i].parents[0].id || person[0].id === someArray[i].parents[1] && someArray[i].gender === male){
-    dad= someArray.firstName + " " + someArray.lastName
-    return dad;
-   }
-
-//for mom
-    else if(person[0].id === someArray[i].id || person[0].id === parents[1] && person[0].gender === female){
-    mom= someArray.firstName + " " + someArray.lastName
-    return mom;
-    }
-
-//husband
-    else if(person[0].id === someArray[i].currentSpouse && person[0].gender === male){
-    husband = someArray.firstName + " " + someArray.lastName
-    return husband;
-    }
-
-
-//wife
-    else if(person[0].id === someArray[i].currentSpouse && person[0].gender === female){
-    wife = someArray.firstName + " " + someArray.lastName
-    return wife;
-    }
-
-//siblings
-    else if(parents[0].id === someArray[i].id || parents[1].id === someArray[i].id){
-    siblings= someArray.firstName + " " + someArray.lastName
-    return siblings;
-    }
-  }
-alert(`the farther is ${dad}\n the mother is ${mom}\n the husband is ${husband}\n the wife is ${wife}\n the siblings are ${siblings}`)
-})
-
-}
-
-
-
-
-
-
-function displayPerson(person,index){
+function displayPerson(person, index){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
  
@@ -657,6 +458,10 @@ function displayPerson(person,index){
 //response: Will capture the user input.
 //isValid: Will capture the return of the validation function callback. true(the user input is valid)/false(the user input was not valid).
 //this function will continue to loop until the user enters something that is not an empty string("") or is considered valid based off the callback function(valid).
+
+
+
+
 function promptFor(question, valid){
   let isValid;
   do{
@@ -701,3 +506,277 @@ function customValidation(input){
 }
 
 //#endregion
+
+
+
+
+//********** First Attempt at the family function
+                                              //Search Family Function
+                                              // function searchByFamily(person, people){
+                                                
+                                              //   // let foundParents= people.filter(function(potentialMatch){
+                                              // //     //added to test if this will walk through array of people
+                                                  
+                                              //     if(person[0].parents != null){ 
+                                              //        foundParent1 = toString(person[0].parents[0]);
+                                              //        foundParent2 = toString(person[0].parents[1]);
+                                                    
+                                              //       //foundParents.push(person[0].parents)
+                                              //       // foundParents.push(person[0].parents[1])
+                                              //       }
+                                              //     else
+                                              //     {return false;
+                                              //     }
+                                              //     parentsName= people.filter(function(potentialMatch){
+                                                    
+                                              //      /// for(let i=0; i<foundParents.length; i++){     
+                                              //       if(potentialMatch.id === foundParent1 || potentialMatch.id === foundParent2){ 
+                                              //         return true;
+                                              //       }
+                                              //       else{return false;
+                                              //       }
+                                              //         }
+                                              //     )
+                                                
+                                                
+                                              //     foundSpouse = people.filter(function(potentialMatch){
+                                              //     //added to test if this will walk through array of people
+                                              //     if(person[0].currentSpouse != null){ 
+                                              //     if(potentialMatch.currentSpouse === person[0].currentSpouse){ 
+                                              //       return true;
+                                              //     }
+                                              //     else{return false;
+                                              //     }
+                                              //   }else{
+                                              //     foundSpouse = 'No Spouse Found!'
+                                                  
+                                              //   }
+                                              //       })
+
+                                              //   let foundSiblings= people.filter(function(potentialMatch){
+                                              //     //added to test if this will walk through array of people
+                                              //     if(person[0].parents != null){ 
+                                              //       foundParents.push(person[0].parents)
+                                              //       // foundParents.push(person[0].parents[1])
+                                              //       }
+                                              //     else{return false;
+                                              //     }
+                                              //     let parentsName= people.filter(function(potentialMatch){
+                                              //       for(let i=0; i<foundParents.length; i++){     
+                                              //       if(potentialMatch.id === foundParents[i]){ 
+                                              //         return true;
+                                              //       }
+                                              //       else{return false;
+                                              //       }
+                                              //         }
+                                              //       })
+                                                
+                                                
+                                              //   let foundSpouse= people.filter(function(potentialMatch){
+                                              //     //added to test if this will walk through array of people
+                                                  
+                                              //     if(potentialMatch.currentSpouse === person[0].id){ 
+                                              //       return true;
+                                              //     }
+                                              //     else{return false;
+                                              //     }
+                                              //       })
+
+                                              //   let foundSiblings= people.filter(function(potentialMatch){
+                                              //     //added to test if this will walk through array of people
+                                                  
+                                              //     if(potentialMatch.parents[0] === person[0].parents[0] || potentialMatch.parents[1] === person[0].parents[1]){ 
+                                              //       return true;
+                                              //     }
+                                              //     else{return false;
+                                              //     }
+                                              //       })
+                                                
+                                                  
+                                              //  alert(person[0] + "'s parents are " +  parentsName + "\n" + "Spouse is " + foundSpouse[0] + "\n" + "Siblings are " + foundSiblings)
+                                              // }
+
+
+                                              // function searchByFamily(person, people){
+                                              //   let foundFamily= people.filter(function(potentialMatch){
+
+                                              //     if(person[0].id === potentialMatch.parents[0] || person[0].id === potentialMatch.parents[1] ||person[0].parents[0] === potentialMatch.id ||  
+                                              //        person[0].id === potentialMatch.currentSpouse || person[0].parents[0] === potentialMatch.parents[0]){
+                                              //       return true;
+                                              //     }
+                                              //     else{
+                                              //       return false;
+                                              //     }
+                                              //   })
+                                              //  displayFamily(person, foundFamily)
+                                                
+                                                  
+                                              //  alert(person[0] + "'s parents are " +  parentsName + "\n" + "Spouse is " + foundSpouse + "\n" + "Siblings are " + foundSiblings)
+                                              // }
+
+                                              // function searchForGrandKids(anArray, person){
+
+                                              //   let foundEveryone= anArray.filter(function(potentionalMatch){
+                                              //     if(potentialMatch.parents[0] === person[i].id || potentialMatch.parents[1] === person[i].id || potentialMatch.currentSpouse === person[i].id){
+                                              //     return true;
+                                              //   }
+                                              //   else{return false;}
+
+                                              //   })
+                                              // return foundEveryone
+
+                                              // }
+
+                                              //#endregion
+
+                                              //Display functions.
+                                              //Functions for user interface.
+                                              /////////////////////////////////////////////////////////////////
+                                              //#region 
+
+
+
+
+
+
+// //New family dispaly function
+// ***************Option 1 Almost working, just needs to get the values of the family to show up in the someArray arguement as its passing through the if Statement.
+
+                                      // function displayFamily(person, someArray){
+                                      // let dad
+                                      // let mom
+                                      // let husband
+                                      // let wife
+                                      // let siblings
+                                      // someArray
+                                      //   person.map(function(person, someArray){
+                                      //     for(let i=0;i<someArray.length; i++){
+                                      //       someArray[i]
+                                      // //for dad
+                                      //     if(person[0].id === someArray[i].parents[0].id || person[0].id === someArray[i].parents[1] && someArray[i].gender === male){
+                                      //     dad= someArray.firstName + " " + someArray.lastName
+                                      //     return dad;
+                                      //    }
+
+                                      // //for mom
+                                      //     else if(person[0].id === someArray[i].id || person[0].id === parents[1] && person[0].gender === female){
+                                      //     mom= someArray.firstName + " " + someArray.lastName
+                                      //     return mom;
+                                      //     }
+
+                                      // //husband
+                                      //     else if(person[0].id === someArray[i].currentSpouse && person[0].gender === male){
+                                      //     husband = someArray.firstName + " " + someArray.lastName
+                                      //     return husband;
+                                      //     }
+
+
+                                      // //wife
+                                      //     else if(person[0].id === someArray[i].currentSpouse && person[0].gender === female){
+                                      //     wife = someArray.firstName + " " + someArray.lastName
+                                      //     return wife;
+                                      //     }
+
+                                      // //siblings
+                                      //     else if(parents[0].id === someArray[i].id || parents[1].id === someArray[i].id){
+                                      //     siblings= someArray.firstName + " " + someArray.lastName
+                                      //     return siblings;
+                                      //     }
+                                      //   }
+                                      // alert(`the farther is ${dad}\n the mother is ${mom}\n the husband is ${husband}\n the wife is ${wife}\n the siblings are ${siblings}`)
+                                      // })
+
+// ********** Option 2  but cant figure out how to call the info correctly
+
+                                      // function familySearch(person, people){
+                                      // let siblings = siblingSearch(person,people)
+                                      // let parents = parentSearch(person,people)
+                                      // let spouse = spouseSearch(person,people)
+
+                                      // displayFamily(person,siblings,parents,spouse)
+
+                                      // }
+
+
+                                      // function siblingSearch(person, people)
+                                      // {
+                                      //   let siblingResult = people.filter(function(potentialMatch)
+                                      //   {
+                                        
+                                      //     if (person.parents[0] === potentialMatch.parents[0] ||person.parents[0] === potentialMatch.parents[1] ||person.parents[1] === potentialMatch.parents[0]  ||person.parents[1] === potentialMatch.parents[1])
+                                      //         {
+                                      //           return true
+                                      //         }
+                                      //         else
+                                      //         {
+                                      //           return false
+                                      //         }
+
+                                      //   })
+                                      //   return siblingResult
+                                      // }
+
+
+
+
+                                      // function parentSearch(person, people)
+                                      // {
+                                      //   let parentidResult = people.filter(function(potentialMatch)
+                                      //   {
+                                      //     if (person.id === potentialMatch.id)
+                                      //     {
+                                      //       return person.parents
+                                      //     }
+                                      //     else
+                                      //     {
+                                      //       return false
+                                      //     }
+                                      //   })
+                                      //   let parentResult = people.filter(function(potentialMatch)
+                                      //   {
+                                          
+                                      //     for (let i = 0 ; i <parentidResult.length; i++){
+                                      //     if (parentidResult[i] === potentialMatch.id)
+                                      //     {
+                                      //       return person.firstName +' ' + person.lastName
+                                      //     }
+                                      //     else
+                                      //     {
+                                      //       return false
+                                      //     }
+                                      // }})
+                                      //   return parentResult
+                                      // }
+
+                                      //   function spouseSearch(person, people){
+                                      //     let spouseResult = people.filter(function(potentialMatch){
+                                      //       if (person.id === potentialMatch.id){
+                                      //         return (person.spouse)
+                                      //       }
+                                      //       else{
+                                      //         return false;
+                                      //       }
+                                      //     })
+                                      //   return spouseResult
+                                      //   }
+
+
+
+                                      // // function displayFamily(person, siblings, parents,spouse)
+                                      // // {
+                                      // //   alert(people.map(function(person, siblings,parents,spouse){
+                                      // //     return person.firstName + " " + person.lastName + "'s siblings are "+  siblings  + '\n' + 'Parents are ' + parents + '\n ' + 'Spouse is ' + spouse}).join("\n"))
+                                      // //   }
+
+                                        
+                                      // function displayFamily(person, siblings, parents,spouse)
+                                      // {
+                                      //   alert(
+                                      //     person.firstName + " " + person.lastName + "'s siblings are "+  siblings.join  + '\n' + 'Parents are ' + parents.join + '\n ' + 'Spouse is ' + spouse)("\n")
+                                      //   }
+
+
+
+
+
+
